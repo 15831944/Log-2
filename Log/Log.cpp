@@ -112,16 +112,42 @@ int SetOutputDirPath(char cDirPath[MAX_PATH], char cLogFileName[_MAX_FNAME], int
 	if (m_patLogInfoList == nullptr)
 	{
 		nIndex = 0;
+		// インスタンス生成
 		m_patLogInfoList = new CArray<CLogInfo*>();
+		// 配列からすべての要素を削除
 		m_patLogInfoList->RemoveAll();
 	}
-	
-	CLogInfo* cLogInfo = new CLogInfo(cDirPath, cLogFileName, nFormatType);
-	m_patLogInfoList->ElementAt(nIndex)->SetDirPath(csDirPath);
-	
-	m_patLogInfoList->Add(cLogInfo);
 
+	// インデックスの値を確認
+	if (m_patLogInfoList->GetCount() > 0) 
+	{
+		// 
+		for (int i = 0; i <= m_patLogInfoList->GetCount() - 1; i++) 
+		{
+			// 登録済みか確認
+			if (m_patLogInfoList->ElementAt(i)->GetDirPath() == csDirPath && m_patLogInfoList->ElementAt(i)->GetLogFileName() == csFileName)
+			{
+
+				// インデックスの値をセット
+				nIndex = i;
+				return LOG_SUCCESS;
+
+			}
+		}
+
+	}
+
+
+	// インスタンス生成
+	CLogInfo* cLogInfo = new CLogInfo(cDirPath, cLogFileName, nFormatType);
+	
+
+
+	// 配列の末尾に要素を追加
+	m_patLogInfoList->Add(cLogInfo);
 	nIndex = (unsigned int)m_patLogInfoList->GetCount() - 1;
+	
+
 
 	return LOG_SUCCESS;
 }
