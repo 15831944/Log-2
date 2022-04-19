@@ -66,34 +66,27 @@ int SetOutputDirPath(char cDirPath[MAX_PATH], char cLogFileName[_MAX_FNAME], int
 	// インデックスの値を確認
 	if (m_patLogInfoList->GetCount() > 0) 
 	{
-		// 
+		// インデックスの数だけループ
 		for (int i = 0; i <= m_patLogInfoList->GetCount() - 1; i++) 
 		{
 			// 登録済みか確認
 			if (m_patLogInfoList->ElementAt(i)->GetDirPath() == csDirPath && m_patLogInfoList->ElementAt(i)->GetLogFileName() == csFileName)
 			{
-
 				// インデックスの値をセット
 				nIndex = i;
 				return LOG_SUCCESS;
-
 			}
 		}
-
 	}
-
 
 	// インスタンス生成
 	CLogInfo* cLogInfo = new CLogInfo(cDirPath, cLogFileName, nFormatType);
-	
-
 
 	// 配列の末尾に要素を追加
 	m_patLogInfoList->Add(cLogInfo);
-	nIndex = (unsigned int)m_patLogInfoList->GetCount() - 1;
 	
-
-
+	// インデックスの値を設定
+	nIndex = (unsigned int)m_patLogInfoList->GetCount() - 1;
 	return LOG_SUCCESS;
 }
 
@@ -103,15 +96,16 @@ int SetOutputDirPath(char cDirPath[MAX_PATH], char cLogFileName[_MAX_FNAME], int
 /// <param name="nIndex">ログ出力に使用するインデックス</param>
 /// <param name="szSourceFileName">ソースファイル名</param>
 /// <param name="nSourceLine">ソース行数</param>
-/// /// <param name="szFunctionName">関数名</param>
+/// <param name="szFunctionName">関数名</param>
 /// <return>0：正常終了 0以外：エラー</return>
 int WriteLog(int nIndex, char szLogText[MAX_LOG_TEXT], char szSourceFileName[_MAX_FNAME], int nSourceLine, char szFunctionName[_MAX_FNAME])
 {
 	
 	TLogInfo tLogInfo;
-	
 	tLogInfo.csFunctionName;
-
+	
+	CString strText;
+	CFile cFile;
 
 	return 0;
 }

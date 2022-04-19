@@ -44,4 +44,13 @@ private:
 	CEdit Index_W;
 public:
 	CEdit Result_W;
+	// ログ内容
+	CEdit LogText;
+	// ソースファイル名
+	CEdit SourceFileName;
+	// ソース行
+	CEdit SourceLine;
+	// 関数名
+	CEdit FunctionName;
+	afx_msg void OnEnChangeEdit10();
 };

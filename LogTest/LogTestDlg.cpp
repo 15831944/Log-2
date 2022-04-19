@@ -67,6 +67,10 @@ void CLogTestDlg::DoDataExchange(CDataExchange* pDX)
 	DDX_Control(pDX, IDC_EDIT2, FileName);
 	DDX_Control(pDX, IDC_EDIT7, Index_W);
 	DDX_Control(pDX, IDC_EDIT10, Result_W);
+	DDX_Control(pDX, IDC_EDIT8, LogText);
+	DDX_Control(pDX, IDC_EDIT9, SourceFileName);
+	DDX_Control(pDX, IDC_EDIT11, SourceLine);
+	DDX_Control(pDX, IDC_EDIT12, FunctionName);
 }
 
 BEGIN_MESSAGE_MAP(CLogTestDlg, CDialogEx)
@@ -75,6 +79,7 @@ BEGIN_MESSAGE_MAP(CLogTestDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON1, &CLogTestDlg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_BUTTON2, &CLogTestDlg::OnBnClickedButton2)
+	ON_EN_CHANGE(IDC_EDIT10, &CLogTestDlg::OnEnChangeEdit10)
 END_MESSAGE_MAP()
 
 
@@ -197,6 +202,7 @@ void CLogTestDlg::OnBnClickedButton1()
 
 }
 
+// 初期設定
 void CLogTestDlg::OnShowWindow()
 {
 
@@ -205,6 +211,19 @@ void CLogTestDlg::OnShowWindow()
 
 	CString csFileName = "TestFile";
 	this->FileName.SetWindowText(csFileName);
+
+	CString csLogText = "Test";
+	this->LogText.SetWindowText(csLogText);
+
+	CString csSourceFileName = __FILE__;
+	this->SourceFileName.SetWindowText(csSourceFileName);
+
+	CString csSourceLine;
+	csSourceLine.Format("%d", __LINE__);
+	this->SourceLine.SetWindowText(csSourceLine);
+
+	CString csFunctionName = __FUNCTION__;
+	this->FunctionName.SetWindowText(csFunctionName);
 
 }
 
@@ -222,3 +241,5 @@ void CLogTestDlg::OnBnClickedButton2()
 	csResult.Format("%d", nResult);
 	this->Result_W.SetWindowText(csResult);
 }
+
+
