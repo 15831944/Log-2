@@ -101,11 +101,36 @@ int SetOutputDirPath(char cDirPath[MAX_PATH], char cLogFileName[_MAX_FNAME], int
 int WriteLog(int nIndex, char szLogText[MAX_LOG_TEXT], char szSourceFileName[_MAX_FNAME], int nSourceLine, char szFunctionName[_MAX_FNAME])
 {
 	
-	TLogInfo tLogInfo;
-	tLogInfo.csFunctionName;
 	
+	TLogInfo tLogInfo;
+	CLogComm cLogComm;
+	tLogInfo.csLogTime = cLogComm.GetTime();
+
+	tLogInfo.csSourceFileName = szSourceFileName;
+	tLogInfo.nSoourceLine = nSourceLine;
+	tLogInfo.csFunctionName = szFunctionName;
+	tLogInfo.csLogText = szLogText;
+
+	// ログ出力内容の整形
 	CString strText;
+	tLogInfo.csSourceFileName = tLogInfo.csSourceFileName.Right(tLogInfo.csSourceFileName.GetLength() - tLogInfo.csSourceFileName.ReverseFind(_T('\\')) - 1);
+	strText.Format("%s\t[LogLevel]\t(%s:%d)\t%s\t%s",
+		(LPCSTR)tLogInfo.csLogTime,
+		(LPCSTR)tLogInfo.csSourceFileName,
+		(unsigned)tLogInfo.nSoourceLine,
+		(LPCSTR)tLogInfo.csFunctionName,
+		szLogText);
+
+	CString csPath;
+	csPath.Format("%s\\%s.log",
+
+		(LPCSTR)m_patLogInfoList->ElementAt(nIndex)->GetDirPath(),
+		(LPCSTR)m_patLogInfoList->ElementAt(nIndex)->GetLogFileName());
 	CFile cFile;
+	cFile.Open(csPath, CFile::modeCreate | CFile::modeReadWrite);
+	cFile.Write(strText, strText.GetLength());
+
+
 
 	return 0;
 }

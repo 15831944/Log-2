@@ -19,3 +19,23 @@ BOOL CLogComm::CheckFileName(char cLogFileName[_MAX_FNAME])
 	}
 	return TRUE;
 }
+
+/// <summary>
+/// ƒƒOo—Í—p“ú‚Ìæ“¾
+/// </summary>
+/// <return>“ú</return>
+CString CLogComm::GetTime()
+{
+	SYSTEMTIME systime;
+	GetLocalTime(&systime);
+	CString csTime;
+	csTime.Format("%04d/%02d/%02d\t%02d:%02d:%02d.%03d",
+		systime.wYear,
+		systime.wMonth,
+		systime.wDay,
+		systime.wHour,
+		systime.wMinute,
+		systime.wSecond,
+		systime.wMilliseconds);
+	return csTime;
+}

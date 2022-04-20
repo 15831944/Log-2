@@ -79,7 +79,6 @@ BEGIN_MESSAGE_MAP(CLogTestDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BUTTON1, &CLogTestDlg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_BUTTON2, &CLogTestDlg::OnBnClickedButton2)
-	ON_EN_CHANGE(IDC_EDIT10, &CLogTestDlg::OnEnChangeEdit10)
 END_MESSAGE_MAP()
 
 
@@ -231,12 +230,27 @@ void CLogTestDlg::OnShowWindow()
 void CLogTestDlg::OnBnClickedButton2()
 {
 	// TODO: ここにコントロール通知ハンドラー コードを追加します。
-	char szLogtext[MAX_LOG_TEXT] = "test";
-	char szFunctionName[_MAX_FNAME] = "LogFunction";
-	CString csIndex = 0;
+
+	CString csIndex;
+	this->Index_W.GetWindowText(csIndex);
 	int nIndex = _ttoi(_T(csIndex));
+
+
+	CString csLogText;
+	this->LogText.GetWindowText(csLogText);
+	char* pszLogText = new char[MAX_LOG_TEXT];
+	ZeroMemory(pszLogText, MAX_LOG_TEXT);
+	pszLogText = csLogText.GetBuffer();
+
+	CString csSourceFileName;
+	this->SourceFileName.GetWindowText(csSourceFileName);
+	char* pszSourceFileName = new char[_MAX_FNAME];
+	ZeroMemory(pszSourceFileName, _MAX_FNAME);
+	pszSourceFileName = csSourceFileName.GetBuffer();
+
+	
 	int nResult = 0;
-	nResult = WriteLog(nIndex, szLogtext, __FILE__, __LINE__, szFunctionName);
+	nResult = WriteLog(nIndex, pszLogText, __FILE__, __LINE__, __FUNCTION__);
 	CString csResult;
 	csResult.Format("%d", nResult);
 	this->Result_W.SetWindowText(csResult);
