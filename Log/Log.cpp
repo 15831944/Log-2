@@ -123,7 +123,6 @@ int WriteLog(int nIndex, char szLogText[MAX_LOG_TEXT], char szSourceFileName[_MA
 
 	CString csPath;
 	csPath.Format("%s\\%s.log",
-
 		(LPCSTR)m_patLogInfoList->ElementAt(nIndex)->GetDirPath(),
 		(LPCSTR)m_patLogInfoList->ElementAt(nIndex)->GetLogFileName());
 	CFile cFile;
