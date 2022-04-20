@@ -126,7 +126,7 @@ int WriteLog(int nIndex, char szLogText[MAX_LOG_TEXT], char szSourceFileName[_MA
 		(LPCSTR)m_patLogInfoList->ElementAt(nIndex)->GetDirPath(),
 		(LPCSTR)m_patLogInfoList->ElementAt(nIndex)->GetLogFileName());
 	CFile cFile;
-	cFile.Open(csPath, CFile::modeReadWrite |CFile::shareDenyWrite );
+	cFile.Open(csPath, CFile::modeWrite | CFile::modeCreate| CFile::modeNoTruncate);
 	cFile.SeekToEnd();
 	cFile.Write(BufferToData, Count);
 
