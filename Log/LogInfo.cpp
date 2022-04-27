@@ -3,7 +3,7 @@
 
 
 
-CLogInfo::CLogInfo(char cDirPath[MAX_PATH], char cLogFileName[_MAX_FNAME], int nFormatType)
+CLogInfo::CLogInfo(wchar_t cDirPath[MAX_PATH], wchar_t cLogFileName[_MAX_FNAME], int nFormatType)
 {
 	m_csDirPath = cDirPath;
 	m_csLogFileName = cLogFileName;

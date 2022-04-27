@@ -9,7 +9,7 @@ public:
 	/// </summary>
 	/// <param name="pszFileName">ログ出力先ファイル名に使用する</param>
 	/// <return>TRUE：禁止文字なし FALSE：禁止文字あり</return>
-	BOOL CheckFileName(char cFileName[_MAX_FNAME] );
+	BOOL CheckFileName(wchar_t cFileName[_MAX_FNAME] );
 	
 	/// <summary>
 	/// ログ出力用日時の取得

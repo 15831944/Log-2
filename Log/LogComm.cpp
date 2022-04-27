@@ -8,11 +8,11 @@ CLogComm::CLogComm()
 /// </summary>
 /// <param name="pszFileName">ログ出力先ファイル名に使用する</param>
 /// <return>TRUE：禁止文字なし FALSE：禁止文字あり</return>
-BOOL CLogComm::CheckFileName(char cLogFileName[_MAX_FNAME])
+BOOL CLogComm::CheckFileName(wchar_t cLogFileName[_MAX_FNAME])
 {
 	CString csFileName;
 	csFileName = cLogFileName;
-	int nResult = csFileName.FindOneOf("\\/:+?\"<>|");
+	int nResult = csFileName.FindOneOf(_T("\\/:+?\"<>|"));
 	if (nResult != -1) 
 	{
 		return FALSE;
@@ -29,7 +29,7 @@ CString CLogComm::GetTime()
 	SYSTEMTIME systime;
 	GetLocalTime(&systime);
 	CString csTime;
-	csTime.Format("%04d/%02d/%02d\t%02d:%02d:%02d.%03d",
+	csTime.Format(_T("%04d/%02d/%02d\t%02d:%02d:%02d.%03d"),
 		systime.wYear,
 		systime.wMonth,
 		systime.wDay,
