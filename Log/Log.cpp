@@ -25,29 +25,25 @@ CArray <CLogInfo*>* m_patLogInfoList = nullptr;
 int SetOutputDirPath(wchar_t cDirPath[MAX_PATH], wchar_t cLogFileName[_MAX_FNAME], int& nIndex, int nFormatType )
 {
 	// 出力先親フォルダが存在するか確認
-	CString  csDirPath;
-	csDirPath = cDirPath;
+	CString  csDirPath = cDirPath;
 	CFileFind cFileFind;
-	BOOL bFileCheck = cFileFind.FindFile(csDirPath);  // 0以外：正常終了
-	if (bFileCheck == 0)
+	// 0以外：正常終了
+	if (cFileFind.FindFile(csDirPath) == 0)
 	{
 		DWORD dwResult = GetLastError();
 		// フォルダが存在しないためエラー
 		return -1;
 	}
 	// ログ出力先ファイル名が空白でないか確認
-	CString csFileName;
-	csFileName.Format(_T("%s"), cLogFileName);
-	bool bEmptyCheck = csFileName.IsEmpty();
-	if (bEmptyCheck == true) 
+	CString csFileName = cLogFileName;
+	if (csFileName.IsEmpty() == true)
 	{
 		// ファイル名が空白""のためエラー
 		return -2;
 	}
 	// ログ出力先ファイル名に禁止文字を使用していないか確認
 	CLogComm cLogComm;
-	BOOL bCheckFileName = cLogComm.CheckFileName(cLogFileName);
-	if (bCheckFileName == FALSE) 
+	if (cLogComm.CheckFileName(cLogFileName) == FALSE)
 	{
 
 		// ファイル名に禁止文字が使用されているためエラー
@@ -118,7 +114,7 @@ int WriteLog(int nIndex, wchar_t szLogText[MAX_LOG_TEXT], wchar_t szSourceFileNa
 		(unsigned)tLogInfo.nSoourceLine,
 		tLogInfo.csFunctionName,
 		szLogText);
-	void* BufferToData = (void*)(strText.GetBuffer());
+	wchar_t* BufferToData = (wchar_t*)(strText.GetBuffer());
 	UINT Count = strText.GetLength() * sizeof(TCHAR);
 
 	CString csPath;

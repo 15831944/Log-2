@@ -191,11 +191,11 @@ void CLogTestDlg::OnBnClickedButton1()
 	int nIndex = _ttoi(csIndex.GetBuffer());
 	int nResult = SetOutputDirPath(pszDirPath, pszFileName, nIndex, 0);
 	csIndex.Format(_T("%d"), nIndex);
-	this->Index.SetWindowTextW(csIndex);
-	this->Index_W.SetWindowTextW(csIndex);
+	this->Index.SetWindowText(csIndex);
+	this->Index_W.SetWindowText(csIndex);
 	CString csResult;
 	csResult.Format(_T("%d"), nResult);
-	this->Result.SetWindowTextW(csResult);
+	this->Result.SetWindowText(csResult);
 
 }
 

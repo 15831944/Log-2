@@ -13,11 +13,11 @@ BOOL CLogComm::CheckFileName(wchar_t cLogFileName[_MAX_FNAME])
 	CString csFileName;
 	csFileName = cLogFileName;
 	int nResult = csFileName.FindOneOf(_T("\\/:+?\"<>|"));
-	if (nResult != -1) 
+	if (nResult < 0) 
 	{
-		return FALSE;
+		return TRUE;
 	}
-	return TRUE;
+	return FALSE;
 }
 
 /// <summary>
