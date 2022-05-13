@@ -17,7 +17,9 @@
 
 #define LOG_SUCCESS 0 // ログ成功
 #define MAX_LOG_TEXT 100 // テキストの最大値
-
+#define NOT_FOUND_FOLDER -1 // フォルダが存在しないためエラー
+#define EMPTY_FILE_NAME -2 // ファイル名が空白""のためエラー
+#define BAN_CHAR_FILE_NAME -3 // ファイル名に禁止文字が使用されているためエラー
 
 // CLogApp
 // このクラスの実装に関しては Log.cpp をご覧ください

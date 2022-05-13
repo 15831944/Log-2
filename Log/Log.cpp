@@ -32,21 +32,21 @@ int SetOutputDirPath(wchar_t cDirPath[MAX_PATH], wchar_t cLogFileName[_MAX_FNAME
 	{
 		DWORD dwResult = GetLastError();
 		// フォルダが存在しないためエラー
-		return -1;
+		return NOT_FOUND_FOLDER;
 	}
 	// ログ出力先ファイル名が空白でないか確認
 	CString csFileName = cLogFileName;
 	if (csFileName.IsEmpty() == true)
 	{
 		// ファイル名が空白""のためエラー
-		return -2;
+		return EMPTY_FILE_NAME;
 	}
 	// ログ出力先ファイル名に禁止文字を使用していないか確認
 	CLogComm cLogComm;
 	if (cLogComm.CheckFileName(cLogFileName) == FALSE)
 	{
 		// ファイル名に禁止文字が使用されているためエラー
-		return -3;
+		return BAN_CHAR_FILE_NAME;
 	}
 	// 初回
 	if (m_patLogInfoList == nullptr)
