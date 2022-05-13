@@ -45,7 +45,6 @@ int SetOutputDirPath(wchar_t cDirPath[MAX_PATH], wchar_t cLogFileName[_MAX_FNAME
 	CLogComm cLogComm;
 	if (cLogComm.CheckFileName(cLogFileName) == FALSE)
 	{
-
 		// ファイル名に禁止文字が使用されているためエラー
 		return -3;
 	}
