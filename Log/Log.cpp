@@ -98,16 +98,18 @@ int WriteLog(int nIndex, wchar_t szLogText[MAX_LOG_TEXT], wchar_t szSourceFileNa
 	
 	TLogInfo tLogInfo;
 	CLogComm cLogComm;
+	//yyyy/mm/dd hh:mm:ss.000 [LogLevel] (SourceFileName.cpp:SourceLine) FunctionName LogText
 	tLogInfo.csLogTime = cLogComm.GetTime();
 	tLogInfo.csSourceFileName = szSourceFileName;
 	tLogInfo.nSoourceLine = nSourceLine;
 	tLogInfo.csFunctionName = szFunctionName;
 	tLogInfo.csLogText = szLogText;
+	// ソースファイル名の整形
+	tLogInfo.csSourceFileName = tLogInfo.csSourceFileName.Right(tLogInfo.csSourceFileName.GetLength() - tLogInfo.csSourceFileName.ReverseFind(_T('\\')) - 1);
 
 	// ログ出力内容の整形
 	CString strText;
-	tLogInfo.csSourceFileName = tLogInfo.csSourceFileName.Right(tLogInfo.csSourceFileName.GetLength() - tLogInfo.csSourceFileName.ReverseFind(_T('\\')) - 1);
-	strText.Format(_T("%s\t[LogLevel]\t(%s:%d)\t%s\t%s\r\n"),
+	strText.Format(_T("%ws\t[LogLevel]\t(%ws:%d)\t%ws\t%ws\r\n"),
 		tLogInfo.csLogTime,
 		tLogInfo.csSourceFileName,
 		(unsigned)tLogInfo.nSoourceLine,
@@ -117,7 +119,7 @@ int WriteLog(int nIndex, wchar_t szLogText[MAX_LOG_TEXT], wchar_t szSourceFileNa
 	UINT Count = strText.GetLength() * sizeof(TCHAR);
 
 	CString csPath;
-	csPath.Format(_T("%s\\%s.log"),
+	csPath.Format(_T("%ws\\%ws.log"),
 		m_patLogInfoList->ElementAt(nIndex)->GetDirPath(),
 		m_patLogInfoList->ElementAt(nIndex)->GetLogFileName());
 	CFile cFile;
@@ -141,7 +143,7 @@ public:
 	{
 
 	};
-
+	// デストラクタ
 	~CInstanceClass()
 	{
 		if (m_patLogInfoList != nullptr)
