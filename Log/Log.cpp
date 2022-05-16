@@ -129,5 +129,38 @@ int WriteLog(int nIndex, wchar_t szLogText[MAX_LOG_TEXT], wchar_t szSourceFileNa
 
 	return 0;
 }
-;
+
+/// <summary>
+/// インスタンスクラス
+/// </summary>
+class CInstanceClass
+{
+public:
+	// コンストラクタ
+	CInstanceClass()
+	{
+
+	};
+
+	~CInstanceClass()
+	{
+		if (m_patLogInfoList != nullptr)
+		{
+			for (int i=0; i < m_patLogInfoList->GetCount(); i++)
+			{
+
+				CLogInfo* pLogInfo = m_patLogInfoList->GetAt(i);
+				delete pLogInfo;
+			}
+			m_patLogInfoList->RemoveAll();
+			delete m_patLogInfoList;
+			m_patLogInfoList = NULL;
+		}
+
+	}
+
+};
+
+CInstanceClass cInstanceClass;
+
 

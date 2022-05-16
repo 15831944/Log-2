@@ -179,17 +179,21 @@ void CLogTestDlg::OnBnClickedButton1()
 	this->DirPath.GetWindowText(csDirPath);
 	wchar_t* pszDirPath = new wchar_t[MAX_PATH];
 	ZeroMemory(pszDirPath, MAX_PATH);
-	pszDirPath = csDirPath.GetBuffer();
+	//pszDirPath = csDirPath.GetBuffer();
+	wcscpy_s(pszDirPath, MAX_PATH, csDirPath);
 
 	CString csFileName;
 	this->FileName.GetWindowText(csFileName);
 	wchar_t* pszFileName = new wchar_t[_MAX_FNAME];
 	ZeroMemory(pszFileName, _MAX_FNAME);
-	pszFileName = csFileName.GetBuffer();
+	wcscpy_s(pszFileName, _MAX_FNAME, csFileName);
+	// pszFileName = csFileName.GetBuffer();
 
 	CString csIndex = _T("0");
 	int nIndex = _ttoi(csIndex.GetBuffer());
 	int nResult = SetOutputDirPath(pszDirPath, pszFileName, nIndex, 0);
+	delete[]pszDirPath;
+	delete[]pszFileName;
 	csIndex.Format(_T("%d"), nIndex);
 	this->Index.SetWindowText(csIndex);
 	this->Index_W.SetWindowText(csIndex);
@@ -238,21 +242,26 @@ void CLogTestDlg::OnBnClickedButton2()
 	this->LogText.GetWindowText(csLogText);
 	wchar_t* pszLogText = new wchar_t[MAX_LOG_TEXT];
 	ZeroMemory(pszLogText, MAX_LOG_TEXT);
-	pszLogText=csLogText.GetBuffer();
+	//pszLogText=csLogText.GetBuffer();
+	wcscpy_s(pszLogText, MAX_LOG_TEXT, csLogText);
 
 
 	CString csSourceFileName;
 	this->SourceFileName.GetWindowText(csSourceFileName);
 	wchar_t* pszSourceFileName = new wchar_t[_MAX_FNAME];
 	ZeroMemory(pszSourceFileName, _MAX_FNAME);
-	pszSourceFileName = csSourceFileName.GetBuffer();
-
+	//pszSourceFileName = csSourceFileName.GetBuffer();
+	wcscpy_s(pszSourceFileName, _MAX_FNAME, csSourceFileName);
 	
 	int nResult = 0;
 	nResult = WriteLog(nIndex, pszLogText, _T(__FILE__), __LINE__, _T(__FUNCTION__));
+	delete[] pszLogText;
+	delete[] pszSourceFileName;
 	CString csResult;
 	csResult.Format(_T("%d"), nResult);
 	this->Result_W.SetWindowText(csResult);
+
+
 }
 
 
