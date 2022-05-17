@@ -1,6 +1,6 @@
 ﻿
 // LogTestDlg.cpp : 実装ファイル
-//
+//aaa
 
 #include "pch.h"
 #include "framework.h"
