@@ -1,5 +1,6 @@
 ﻿// Log.cpp : DLL の初期化ルーチンを定義します。
 //
+//aaaaa
 
 #include "pch.h"
 #include "framework.h"
