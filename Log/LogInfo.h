@@ -31,7 +31,7 @@ class CLogInfo
 {
 public:
 	// コンストラクタ
-	CLogInfo(wchar_t cDirPath[MAX_PATH], wchar_t cLogFileName[_MAX_FNAME], int nFormatType);
+	CLogInfo(TCHAR cDirPath[MAX_PATH], TCHAR cLogFileName[_MAX_FNAME], int nFormatType);
 
 	/// <summary>
 	/// メンバ変数にインデックスを設定

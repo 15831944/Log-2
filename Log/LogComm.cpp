@@ -8,7 +8,7 @@ CLogComm::CLogComm()
 /// </summary>
 /// <param name="pszFileName">ログ出力先ファイル名に使用する</param>
 /// <return>TRUE：禁止文字なし FALSE：禁止文字あり</return>
-BOOL CLogComm::CheckFileName(wchar_t cLogFileName[_MAX_FNAME])
+BOOL CLogComm::CheckFileName(TCHAR cLogFileName[_MAX_FNAME])
 {
 	CString csFileName;
 	csFileName = cLogFileName;

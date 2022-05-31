@@ -53,7 +53,7 @@ enum ELogLevel
 /// <param name="nIndex">ログ出力に使用するインデックス</param>
 /// <param name="nFormatType">ログ出力フォーマット 0:システムログ　1：通信ログ</param>
 /// <return>0：正常終了 0以外：エラー</return>
-DLL_API int SetOutputDirPath(wchar_t cDirPath[MAX_PATH], wchar_t cLogFileName[_MAX_FNAME], int& nIndex, int nFormatType = 0);
+DLL_API int SetOutputDirPath(TCHAR cDirPath[MAX_PATH], TCHAR cLogFileName[_MAX_FNAME], int& nIndex, int nFormatType = 0);
 
 
 /// <summary>
@@ -65,4 +65,4 @@ DLL_API int SetOutputDirPath(wchar_t cDirPath[MAX_PATH], wchar_t cLogFileName[_M
 /// <param name="nSourceLine">ソース行数</param>
 /// <param name="szFunctionName">関数名</param>
 /// <return>0：正常終了 0以外：エラー</return>
-DLL_API int WriteLog(int nIndex, wchar_t cLogText[MAX_LOG_TEXT], wchar_t cSourceFileName[_MAX_FNAME], int nSourceLine, wchar_t cFunctionName[_MAX_FNAME]);
+DLL_API int WriteLog(int nIndex, TCHAR cLogText[MAX_LOG_TEXT], TCHAR cSourceFileName[_MAX_FNAME], int nSourceLine, TCHAR cFunctionName[_MAX_FNAME]);

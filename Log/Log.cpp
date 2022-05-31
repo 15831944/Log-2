@@ -23,7 +23,7 @@ CArray <CLogInfo*>* m_patLogInfoList = nullptr;
 /// <param name="nIndex">ログ出力に使用するインデックス</param>
 /// <param name="nFormatType">ログ出力フォーマット 0:システムログ　1：通信ログ</param>
 /// <return>0：正常終了 0以外：エラー</return>
-int SetOutputDirPath(wchar_t cDirPath[MAX_PATH], wchar_t cLogFileName[_MAX_FNAME], int& nIndex, int nFormatType )
+int SetOutputDirPath(TCHAR cDirPath[MAX_PATH], TCHAR cLogFileName[_MAX_FNAME], int& nIndex, int nFormatType )
 {
 	// 出力先親フォルダが存在するか確認
 	CString  csDirPath = cDirPath;
@@ -94,7 +94,7 @@ int SetOutputDirPath(wchar_t cDirPath[MAX_PATH], wchar_t cLogFileName[_MAX_FNAME
 /// <param name="nSourceLine">ソース行数</param>
 /// <param name="szFunctionName">関数名</param>
 /// <return>0：正常終了 0以外：エラー</return>
-int WriteLog(int nIndex, wchar_t szLogText[MAX_LOG_TEXT], wchar_t szSourceFileName[_MAX_FNAME], int nSourceLine, wchar_t szFunctionName[_MAX_FNAME])
+int WriteLog(int nIndex, TCHAR szLogText[MAX_LOG_TEXT], TCHAR szSourceFileName[_MAX_FNAME], int nSourceLine, TCHAR szFunctionName[_MAX_FNAME])
 {
 	
 	TLogInfo tLogInfo;
@@ -110,17 +110,17 @@ int WriteLog(int nIndex, wchar_t szLogText[MAX_LOG_TEXT], wchar_t szSourceFileNa
 
 	// ログ出力内容の整形
 	CString strText;
-	strText.Format(_T("%ws\t[LogLevel]\t(%ws:%d)\t%ws\t%ws\r\n"),
+	strText.Format(_T("%s\t[LogLevel]\t(%s:%d)\t%s\t%s\r\n"),
 		tLogInfo.csLogTime,
 		tLogInfo.csSourceFileName,
 		(unsigned)tLogInfo.nSoourceLine,
 		tLogInfo.csFunctionName,
 		szLogText);
-	wchar_t* BufferToData = (wchar_t*)(strText.GetBuffer());
+	TCHAR* BufferToData = (TCHAR*)(strText.GetBuffer());
 	UINT Count = strText.GetLength() * sizeof(TCHAR);
 
 	CString csPath;
-	csPath.Format(_T("%ws\\%ws.log"),
+	csPath.Format(_T("%s\\%s.log"),
 		m_patLogInfoList->ElementAt(nIndex)->GetDirPath(),
 		m_patLogInfoList->ElementAt(nIndex)->GetLogFileName());
 	CFile cFile;
